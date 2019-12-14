@@ -1,0 +1,11 @@
+OK_MSG = 'OK'
+ERROR_MSG = 'Internal Server Error'
+PHONE_EXISTS = 'Phone Number Already Exists'
+EMAIL_EXISTS = 'Email Already Exists'
+LOGIN_MSG = 'You are Logged In'
+INVALID_PASS = 'Invalid Password'
+INVALID_USER = 'Invalid Username'
+LOGIN_FAIL = 'Login Failed Due to Technical Issue'
+LOGOUT_MSG = 'Log Out Successful'
+
+EMP_ENROLLED = 'Employee Successfully Enrolled'
