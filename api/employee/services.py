@@ -3,6 +3,7 @@ import uuid
 from api import db, login_manager
 
 from .models import Employee
+from ..device.models import fetch_devices_from_emp_uuid
 
 
 def enroll_employee(emp_data):
@@ -68,6 +69,7 @@ def fetch_employee_details():
 
     for emp in query_set:
         emp_detail = emp.serialize
+        emp_detail['device_details'] = fetch_devices_from_emp_uuid(emp.id)
         emp_details[emp.employee_id] = emp_detail
     return emp_details
 

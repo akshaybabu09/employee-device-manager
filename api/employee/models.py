@@ -1,11 +1,9 @@
+import random
+
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from api import db
-
-
-def set_password(password):
-    return generate_password_hash(password)
 
 
 class Employee(UserMixin, db.Model):
@@ -51,3 +49,30 @@ class Employee(UserMixin, db.Model):
 
     def verify_password(self, user_password):
         return check_password_hash(self.password, user_password)
+
+
+def set_password(password):
+    return generate_password_hash(password)
+
+
+def fetch_employee_from_uuid(emp_uuid):
+    emp = Employee.query.filter(Employee.id == emp_uuid).first()
+    return emp.serialize
+
+
+def fetch_employee_from_emp_id(emp_id):
+    return Employee.query.filter(
+        Employee.employee_id == emp_id,
+        Employee.is_active == True,
+        Employee.is_manager == False
+    ).first()
+
+
+def fetch_random_employee():
+    query_set = db.session.query(Employee.id).filter(
+        Employee.is_active == True, Employee.is_manager == False
+    ).all()
+    emp_ids = [item for query in query_set for item in query]
+    emp_id = random.choice(emp_ids)
+    return emp_id
+
