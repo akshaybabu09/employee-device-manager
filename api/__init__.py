@@ -23,7 +23,6 @@ app.config['SESSION_SQLALCHEMY'] = db
 Session(app)
 
 login_manager = LoginManager(app)
-# login_manager.login_view = 'auth.login'
 login_manager.init_app(app)
 # celery = make_celery(app)
 

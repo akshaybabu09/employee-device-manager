@@ -5,9 +5,7 @@ from api import db
 
 
 def set_password(password):
-    pass_hash = generate_password_hash(password)
-
-    return pass_hash
+    return generate_password_hash(password)
 
 
 class Employee(UserMixin, db.Model):
@@ -25,7 +23,8 @@ class Employee(UserMixin, db.Model):
     email = db.Column(db.String)
     address = db.Column(db.String)
     pincode = db.Column(db.Integer)
-    # is_active = db.Column(db.Boolean, default=True)
+    is_active = db.Column(db.Boolean, default=True)
+    is_manager = db.Column(db.Boolean, default=False)
 
     def __init__(self, **kwargs):
         self.id = kwargs.get('uuid')
@@ -50,13 +49,5 @@ class Employee(UserMixin, db.Model):
     def is_authenticated(self):
         return True
 
-    @property
-    def is_active(self):
-        return True
-
-    # @staticmethod
     def verify_password(self, user_password):
         return check_password_hash(self.password, user_password)
-
-    # @staticmethod
-    # def generate_emp_id():

@@ -13,7 +13,8 @@ def enroll_employee(emp_data):
         contact=emp_data.get('contact'),
         email=emp_data.get('email')
     )
-    # emp.set_password(emp_data.get('contact'))
+    if emp_data.get('is_manager'):
+        emp.is_manager = True
     db.session.add(emp)
     db.session.commit()
     return emp
@@ -42,9 +43,33 @@ def fetch_emp_from_emp_id(emp_id):
 
 
 def update_employee_details(emp, request_json):
-    # print(type(emp))
-    print(request_json)
+    emp.contact = request_json.get('contact', emp.contact)
+    emp.email = request_json.get('email', emp.email)
+    emp.address = request_json.get('address', emp.address)
+    emp.pincode = request_json.get('pincode', emp.pincode)
+    db.session.add(emp)
+    db.session.commit()
 
+
+def remove_employee(emp_id):
+    emp = Employee.query.filter(Employee.employee_id == emp_id).first()
+    emp.is_active = False
+    db.session.add(emp)
+    db.session.commit()
+
+
+def fetch_employee_details():
+    query_set = Employee.query.filter(
+        Employee.is_manager == False,
+        Employee.is_active == True
+    ).all()
+
+    emp_details = {}
+
+    for emp in query_set:
+        emp_detail = emp.serialize
+        emp_details[emp.employee_id] = emp_detail
+    return emp_details
 
 
 @login_manager.user_loader
