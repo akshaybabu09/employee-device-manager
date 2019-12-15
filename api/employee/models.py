@@ -13,7 +13,7 @@ class Employee(UserMixin, db.Model):
     __tablename__ = 'employee_table'
 
     id = db.Column(db.String, primary_key=True)
-    employee_id = db.Column(db.Integer, db.Sequence('emp_table_seq'), unique=True, index=True)
+    employee_id = db.Column(db.Integer, unique=True, index=True)
     first_name = db.Column(db.String)
     last_name = db.Column(db.String)
     password = db.Column(db.String)
@@ -26,7 +26,7 @@ class Employee(UserMixin, db.Model):
 
     def __init__(self, **kwargs):
         self.id = kwargs.get('uuid')
-        # self.employee_id = generate_emp_id()
+        self.employee_id = generate_emp_id()
         self.first_name = kwargs.get('first_name')
         self.last_name = kwargs.get('last_name')
         self.contact = kwargs.get('contact')
@@ -76,3 +76,10 @@ def fetch_random_employee():
     emp_id = random.choice(emp_ids)
     return emp_id
 
+
+def generate_emp_id():
+    emp_id = random.randint(100000, 999999)
+    emp = Employee.query.filter(Employee.employee_id == emp_id).first()
+    if emp:
+        return generate_emp_id()
+    return emp_id

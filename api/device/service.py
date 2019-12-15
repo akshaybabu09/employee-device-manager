@@ -1,6 +1,9 @@
-from api import db
+from flask_mail import Message
+
+from api import db, celery, app, mail
+from api.constants import *
 from api.device.models import Device
-from api.employee.models import fetch_employee_from_emp_id, fetch_employee_from_uuid
+from api.employee.models import fetch_employee_from_uuid
 from api.employee.services import generate_id
 
 
@@ -16,6 +19,7 @@ def enroll_device(emp, device_data):
 
     db.session.add(device)
     db.session.commit()
+    return device
 
 
 def check_for_device_id(device_id):
@@ -58,3 +62,35 @@ def remove_device(device_id):
     device.is_deleted = True
     db.session.add(device)
     db.session.commit()
+    return device
+
+
+@celery.task
+def send_device_details_to_emp(emp, device):
+    mail_data = {
+        'subject': DEVICE_ASSIGN,
+        'recipients': [emp['email']],
+        'mail_body': assign_mail_body(emp, device)
+    }
+    send_mail(mail_data)
+
+
+@celery.task
+def send_device_unassignment_details_to_emp(emp, device):
+    mail_data = {
+        'subject': DEVICE_UNASSIGN,
+        'recipients': [emp['email']],
+        'mail_body': unassign_mail_body(emp, device)
+    }
+    send_mail(mail_data)
+
+
+def send_mail(mail_data):
+    msg = Message(
+        mail_data['subject'],
+        sender=app.config['MAIL_USERNAME'],
+        recipients=mail_data['recipients']
+    )
+    msg.body = mail_data['mail_body']
+    with app.app_context():
+        mail.send(msg)

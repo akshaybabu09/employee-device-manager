@@ -74,6 +74,25 @@ class UpdateEmployeeAPI(Resource):
             return ERROR_MSG, INTERNAL_SERVER_ERROR
 
 
+class ChangePasswordAPI(Resource):
+    method_decorators = [login_required]
+
+    def post(self):
+        from api.employee.services import reset_password
+        from flask_login import logout_user
+
+        try:
+            password = request.form['password']
+            confirm_password = request.form['confirm_password']
+            if not (password == confirm_password):
+                return PASSWORDS_DONOT_MATCH, BAD_REQUEST
+            reset_password(current_user, password)
+            logout_user()
+            return PASSWORD_RESET, OK
+        except:
+            return ERROR_MSG, INTERNAL_SERVER_ERROR
+
+
 class EmployeeDetailsAPI(Resource):
     method_decorators = [login_required]
 
@@ -84,6 +103,7 @@ class EmployeeDetailsAPI(Resource):
             if current_user.is_manager:
                 emp_details = fetch_employee_details()
                 return {"emp_details": emp_details}, OK
+            return NO_ACCESS, NOT_ACCEPTABLE
         except:
             return ERROR_MSG, INTERNAL_SERVER_ERROR
 

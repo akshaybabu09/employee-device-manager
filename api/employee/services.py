@@ -2,7 +2,7 @@ import uuid
 
 from api import db, login_manager
 
-from .models import Employee
+from .models import Employee, set_password
 from ..device.models import fetch_devices_from_emp_uuid
 
 
@@ -72,6 +72,12 @@ def fetch_employee_details():
         emp_detail['device_details'] = fetch_devices_from_emp_uuid(emp.id)
         emp_details[emp.employee_id] = emp_detail
     return emp_details
+
+
+def reset_password(user, password):
+    user.password = set_password(password)
+    db.session.add(user)
+    db.session.commit()
 
 
 @login_manager.user_loader
