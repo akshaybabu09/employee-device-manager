@@ -29,11 +29,36 @@ pip3 install -r requirements.txt
 ```
 
 ## Execution Flow
+
+##### Flask
 ```
+export HOST_EMAIL='yourmail@gmail.com'
+export HOST_PASSWORD='yourpassword'
+export APP_SETTINGS="config.ProductionConfig"
+export DATABASE_NAME='manager_db'
+export DATABASE_USER='manager'
+export DATABASE_PASSWORD='manager*1243'
+export DATABASE_HOST='localhost'
+export DATABASE_URL="postgresql://manager:manager*1243@localhost:5433/manager_db"
+
 python manage.py db init
 python manage.py db migrate
 python manage.py db upgrade
 python manage.py runserver
+```
+
+##### Celery - Async Task
+```
+export HOST_EMAIL='yourmail@gmail.com'
+export HOST_PASSWORD='yourpassword'
+export APP_SETTINGS="config.ProductionConfig"
+export DATABASE_NAME='manager_db'
+export DATABASE_USER='manager'
+export DATABASE_PASSWORD='manager*1243'
+export DATABASE_HOST='localhost'
+export DATABASE_URL="postgresql://manager:manager*1243@localhost:5433/manager_db"
+
+celery -A manage.celery worker -l info
 ```
 
 ## Explanantion
