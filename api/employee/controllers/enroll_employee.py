@@ -8,9 +8,9 @@ from api.utils.status_messages import PHONE_EXISTS, EMAIL_EXISTS, EMP_ENROLLED, 
 class EnrollEmployeeAPI(Resource):
 
     def post(self):
-        from api.employee.services import enroll_employee
-        from api.employee.services import verify_if_phone_exists
-        from api.employee.services import verify_if_email_exists
+        from api.employee.service import enroll_employee
+        from api.employee.service import verify_if_phone_exists
+        from api.employee.service import verify_if_email_exists
 
         try:
             phone_exists = verify_if_phone_exists(request.json.get('contact'))

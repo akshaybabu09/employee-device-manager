@@ -9,11 +9,11 @@ class EmployeeLoginAPI(Resource):
 
     def post(self):
         from api.utils.libs import generate_token
-        from api.employee.services import fetch_emp_from_emp_id
+        from api.employee.service import fetch_emp_from_emp_id
 
         try:
-            username = request.form['emp_id']
-            password = request.form['password']
+            username = request.json.get('emp_id')
+            password = request.json.get('password')
             emp = fetch_emp_from_emp_id(int(username))
             if not emp:
                 return INVALID_USER, BAD_REQUEST

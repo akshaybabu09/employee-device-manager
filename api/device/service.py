@@ -3,7 +3,7 @@ from flask_mail import Message
 from api import db, celery, app, mail
 from api.device.models import Device
 from api.employee.models import fetch_employee_from_uuid
-from api.employee.services import generate_id
+from api.employee.service import generate_id
 from api.utils.constants import DEVICE_ASSIGN, assign_mail_body, DEVICE_UNASSIGN, unassign_mail_body
 
 
@@ -69,13 +69,6 @@ def remove_device(device_id):
     db.session.add(device)
     db.session.commit()
     return device
-
-
-# def fetch_details(device_id):
-#     print(device_id)
-#
-#     print(device)
-#     return device.serialize
 
 
 @celery.task

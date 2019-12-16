@@ -10,7 +10,7 @@ class UpdateEmployeeAPI(Resource):
     method_decorators = [token_required]
 
     def put(self, current_user):
-        from api.employee.services import update_employee_details
+        from api.employee.service import update_employee_details
 
         try:
             if not bool(request.json):

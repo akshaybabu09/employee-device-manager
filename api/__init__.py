@@ -42,13 +42,14 @@ app.config.update(
     MAIL_SERVER='smtp.gmail.com',
     MAIL_PORT=587,
     MAIL_USE_TLS=True,
-    MAIL_USERNAME='testmail.loktra@gmail.com',
-    MAIL_PASSWORD='testmail*1243'
+    MAIL_USERNAME=os.environ['HOST_EMAIL'],
+    MAIL_PASSWORD=os.environ['HOST_PASSWORD']
 )
 mail = Mail(app)
 
 # Models
 from api.employee.models import Employee
+from api.device.models import Device
 
 
 db.create_all()
