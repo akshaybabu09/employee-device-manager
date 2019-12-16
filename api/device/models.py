@@ -1,6 +1,6 @@
 from api import db
-from api.constants import *
 from api.employee.models import fetch_random_employee
+from api.utils.constants import DEVICE_INFO, EMPLOYEE_TABLE
 
 
 class Device(db.Model):

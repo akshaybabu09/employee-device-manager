@@ -26,7 +26,7 @@ celery.conf.update(app.config)
 def runserver():
     """ overriding the runserver command
     """
-    app.run(host='0.0.0.0', port=8001, debug=True)
+    app.run()
 
 
 if __name__ == '__main__':

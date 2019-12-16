@@ -22,7 +22,6 @@ class Employee(UserMixin, db.Model):
     address = db.Column(db.String)
     pincode = db.Column(db.Integer)
     is_active = db.Column(db.Boolean, default=True)
-    is_manager = db.Column(db.Boolean, default=False)
 
     def __init__(self, **kwargs):
         self.id = kwargs.get('uuid')
@@ -64,7 +63,6 @@ def fetch_employee_from_emp_id(emp_id):
     return Employee.query.filter(
         Employee.employee_id == emp_id,
         Employee.is_active == True,
-        Employee.is_manager == False
     ).first()
 
 

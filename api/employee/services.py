@@ -14,8 +14,7 @@ def enroll_employee(emp_data):
         contact=emp_data.get('contact'),
         email=emp_data.get('email')
     )
-    if emp_data.get('is_manager'):
-        emp.is_manager = True
+
     db.session.add(emp)
     db.session.commit()
     return emp
@@ -61,7 +60,6 @@ def remove_employee(emp_id):
 
 def fetch_employee_details():
     query_set = Employee.query.filter(
-        Employee.is_manager == False,
         Employee.is_active == True
     ).all()
 
@@ -82,9 +80,4 @@ def reset_password(user, password):
 
 @login_manager.user_loader
 def load_user(user_id):
-    """
-        Loads a user for flask login.
-        :param user_id: ID of the user.
-        :return: The user object
-    """
     return Employee.query.filter(Employee.id == user_id).first()
