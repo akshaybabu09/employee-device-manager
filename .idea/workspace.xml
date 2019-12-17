@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ffd1c139-9db5-4e57-bc76-31e59bce4856" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-    </list>
+    <list default="true" id="ffd1c139-9db5-4e57-bc76-31e59bce4856" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -27,7 +25,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$/project/flasky/celery_loktra_project" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="ServiceViewManager">
     <option name="viewStates">
@@ -55,9 +53,17 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="718" y="257" width="530" height="598" key="FileChooserDialogImpl" timestamp="1576296844594">
+    <state x="656" y="246" width="655" height="619" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1576493500206">
       <screen x="57" y="34" width="1863" height="1046" />
     </state>
-    <state x="718" y="257" width="530" height="598" key="FileChooserDialogImpl/57.34.1863.1046@57.34.1863.1046" timestamp="1576296844594" />
+    <state x="656" y="246" width="655" height="619" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/57.34.1863.1046@57.34.1863.1046" timestamp="1576493500206" />
+    <state x="718" y="257" width="530" height="598" key="FileChooserDialogImpl" timestamp="1576513229029">
+      <screen x="57" y="34" width="1863" height="1046" />
+    </state>
+    <state x="718" y="257" width="530" height="598" key="FileChooserDialogImpl/57.34.1863.1046@57.34.1863.1046" timestamp="1576513229029" />
+    <state x="557" y="225" width="862" height="662" key="find.popup" timestamp="1576428126153">
+      <screen x="57" y="34" width="1863" height="1046" />
+    </state>
+    <state x="557" y="225" width="862" height="662" key="find.popup/57.34.1863.1046@57.34.1863.1046" timestamp="1576428126153" />
   </component>
 </project>
